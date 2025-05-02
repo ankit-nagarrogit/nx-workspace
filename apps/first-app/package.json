@@ -1,0 +1,8 @@
+{
+  "name": "@my-workspace/first-app",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "first-app"
+  }
+}
