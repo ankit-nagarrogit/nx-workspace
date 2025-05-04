@@ -24,26 +24,26 @@ pipelines:
                 - echo "🚀 Checking affected projects for first-app..."
                 - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
                 - echo "Affected projects: $AFFECTED"
-                - |
+                - >
                   if echo "$AFFECTED" | grep -q first-app; then
-                    echo "First-app is affected. Building and deploying..."
-                    npx nx build first-app
-                    npm run deploy:first
+                    echo "✅ first-app is affected. Building and deploying...";
+                    npx nx build first-app;
+                    npm run deploy:first;
                   else
-                    echo "No changes in first-app — skipping."
+                    echo "❌ No changes in first-app — skipping.";
                   fi
 
           - step:
               name: Simulate deploy: second-app
               script:
-                - echo "Checking affected projects for second-app..."
+                - echo "🚀 Checking affected projects for second-app..."
                 - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
                 - echo "Affected projects: $AFFECTED"
-                - |
+                - >
                   if echo "$AFFECTED" | grep -q second-app; then
-                    echo "Second-app is affected. Building and deploying..."
-                    npx nx build second-app
-                    npm run deploy:second
+                    echo "✅ second-app is affected. Building and deploying...";
+                    npx nx build second-app;
+                    npm run deploy:second;
                   else
-                    echo "No changes in second-app — skipping."
+                    echo "❌ No changes in second-app — skipping.";
                   fi
