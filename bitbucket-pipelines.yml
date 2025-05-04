@@ -1,13 +1,10 @@
 image: node:18
 
-clone:
-  depth: full
-
 pipelines:
   branches:
     main:
       - step:
-          name: Install Dependencies
+          name: Install dependencies
           caches:
             - node
           script:
@@ -19,12 +16,12 @@ pipelines:
 
       - parallel:
           - step:
-              name: Simulate deploy: first-app
+              name: Simulate deploy- first-app
               script:
-                - echo "🚀 Checking affected projects for first-app..."
-                - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
-                - echo "Affected projects: $AFFECTED"
                 - >
+                  echo "🚀 Checking affected projects for first-app...";
+                  AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD);
+                  echo "Affected projects: $AFFECTED";
                   if echo "$AFFECTED" | grep -q first-app; then
                     echo "✅ first-app is affected. Building and deploying...";
                     npx nx build first-app;
@@ -34,12 +31,12 @@ pipelines:
                   fi
 
           - step:
-              name: Simulate deploy: second-app
+              name: Simulate deploy- second-app
               script:
-                - echo "🚀 Checking affected projects for second-app..."
-                - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
-                - echo "Affected projects: $AFFECTED"
                 - >
+                  echo "🚀 Checking affected projects for second-app...";
+                  AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD);
+                  echo "Affected projects: $AFFECTED";
                   if echo "$AFFECTED" | grep -q second-app; then
                     echo "✅ second-app is affected. Building and deploying...";
                     npx nx build second-app;
