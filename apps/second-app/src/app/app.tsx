@@ -9,7 +9,7 @@ export function App() {
   return (
     <div>
       <Header />
-      <h1>This is second app for build</h1>
+      <h1>This is second app</h1>
       <Orders />
       <Button />
       <Footer />
