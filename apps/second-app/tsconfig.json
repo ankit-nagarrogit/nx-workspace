@@ -3,7 +3,7 @@
   "include": [],
   "references": [
     {
-      "path": "../../shared/products"
+      "path": "../../shared/orders"
     },
     {
       "path": "../../shared/common-ui"
