@@ -7,10 +7,11 @@ pipelines:
   branches:
     main:
       - step:
-          name: Install dependencies
+          name: Install Dependencies
           caches:
             - node
           script:
+            - echo "🔧 Installing dependencies..."
             - npm ci
             - npx nx reset
           artifacts:
@@ -18,17 +19,31 @@ pipelines:
 
       - parallel:
           - step:
-              name: Build + Deploy first-app (if affected)
+              name: Simulate deploy: first-app
               script:
-                - npx nx show projects --affected --base=origin/main --head=HEAD | grep first-app \
-                  && npx nx build first-app \
-                  && npm run deploy:first \
-                  || echo "No changes in first-app"
+                - echo "🚀 Checking affected projects for first-app..."
+                - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
+                - echo "Affected projects: $AFFECTED"
+                - |
+                  if echo "$AFFECTED" | grep -q first-app; then
+                    echo "First-app is affected. Building and deploying..."
+                    npx nx build first-app
+                    npm run deploy:first
+                  else
+                    echo "No changes in first-app — skipping."
+                  fi
 
           - step:
-              name: Build + Deploy second-app (if affected)
+              name: Simulate deploy: second-app
               script:
-                - npx nx show projects --affected --base=origin/main --head=HEAD | grep second-app \
-                  && npx nx build second-app \
-                  && npm run deploy:second \
-                  || echo "No changes in second-app"
+                - echo "Checking affected projects for second-app..."
+                - AFFECTED=$(npx nx show projects --affected --base=origin/main --head=HEAD)
+                - echo "Affected projects: $AFFECTED"
+                - |
+                  if echo "$AFFECTED" | grep -q second-app; then
+                    echo "Second-app is affected. Building and deploying..."
+                    npx nx build second-app
+                    npm run deploy:second
+                  else
+                    echo "No changes in second-app — skipping."
+                  fi
