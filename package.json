@@ -9,6 +9,8 @@
     "build:first": "nx build first-app",
     "build:second": "nx build second-app",
     "build:all": "nx run-many --target=build --all",
+    "deploy:first": "echo 🚀 Simulated deploy of first-app to environment",
+    "deploy:second": "echo 🚀 Simulated deploy of second-app to environment",
     "test:first": "nx test first-app",
     "test:second": "nx test second-app",
     "test:all": "nx run-many --target=test --all",

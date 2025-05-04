@@ -1,36 +1,34 @@
 image: node:18
 
-options:
-  size: 2x  # Increase if builds are heavy
-  max-time: 15  # Max step time in minutes
+clone:
+  depth: full
 
 pipelines:
-  default:
-    - step:
-        name: Install dependencies
-        caches:
-          - node
-        script:
-          - npm ci
-          - npx nx reset  # Optional, ensures clean daemon state
-        artifacts:
-          - node_modules/**
+  branches:
+    main:
+      - step:
+          name: Install dependencies
+          caches:
+            - node
+          script:
+            - npm ci
+            - npx nx reset
+          artifacts:
+            - node_modules/**
 
-    - parallel:
-        - step:
-            name: Build affected apps
-            caches:
-              - node
-            script:
-              - npm ci
-              - echo "Building affected apps..."
-              - npx nx affected --target=build --base=origin/main --head=HEAD
+      - parallel:
+          - step:
+              name: Build + Deploy first-app (if affected)
+              script:
+                - npx nx show projects --affected --base=origin/main --head=HEAD | grep first-app \
+                  && npx nx build first-app \
+                  && npm run deploy:first \
+                  || echo "No changes in first-app"
 
-        - step:
-            name: Lint affected apps
-            caches:
-              - node
-            script:
-              - npm ci
-              - echo "Linting affected apps..."
-              - npx nx affected --target=lint --base=origin/main --head=HEAD
+          - step:
+              name: Build + Deploy second-app (if affected)
+              script:
+                - npx nx show projects --affected --base=origin/main --head=HEAD | grep second-app \
+                  && npx nx build second-app \
+                  && npm run deploy:second \
+                  || echo "No changes in second-app"
