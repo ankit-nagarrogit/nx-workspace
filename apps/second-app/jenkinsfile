@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://your-repo-url.git' // update this with your actual Git URL
+        git 'https://github.com/ankit-nagarrogit/nx-workspace.git' // update this with your actual Git URL
       }
     }
 
