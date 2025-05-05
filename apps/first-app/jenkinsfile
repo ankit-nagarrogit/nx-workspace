@@ -18,19 +18,19 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        sh 'npm install'
+        bat 'npm install'
       }
     }
 
     stage('Build first-app') {
       steps {
-        sh 'npx nx build first-app'
+        bat 'npx nx build first-app'
       }
     }
 
     stage('Deploy first-app') {
       steps {
-        sh '''
+        bat '''
           mkdir -p /var/www/first-app
           cp -r dist/apps/first-app/* /var/www/first-app/
           npx serve -s /var/www/first-app -l 3001 &
