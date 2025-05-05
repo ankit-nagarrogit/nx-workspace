@@ -12,7 +12,7 @@ export function App() {
       {/* These routes and navigation have been generated for you */}
       {/* Feel free to move and update them to fit your needs */}
       <Header />
-      <h1>This is First App</h1>
+      <h1>This is First Apps</h1>
       <Products />
       <Footer />
     </div>

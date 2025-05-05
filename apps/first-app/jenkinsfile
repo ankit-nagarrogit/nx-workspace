@@ -1,0 +1,41 @@
+pipeline {
+  agent any
+
+  tools {
+    nodejs 'NodeJS_LTS'
+  }
+
+  environment {
+    NX_SKIP_NX_CACHE = 'true'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://your-repo-url.git' // update this with your actual Git URL
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    }
+
+    stage('Build first-app') {
+      steps {
+        sh 'npx nx build first-app'
+      }
+    }
+
+    stage('Deploy first-app') {
+      steps {
+        sh '''
+          mkdir -p /var/www/first-app
+          cp -r dist/apps/first-app/* /var/www/first-app/
+          npx serve -s /var/www/first-app -l 3001 &
+        '''
+      }
+    }
+  }
+}
