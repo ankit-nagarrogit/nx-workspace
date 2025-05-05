@@ -32,8 +32,8 @@ pipeline {
       steps {
         bat '''
           mkdir C:\\var\\www\\first-app
-          xcopy /E /I /H dist\\* C:\\var\\www\\first-app\\
-          npx serve -s C:\\var\\www\\first-app -l 3001
+          xcopy /E /I /H apps\\first-app\\dist\\* C:\\var\\www\\first-app\\
+          npx serve -s "C:/var/www/first-app" -l 3001
         '''
       }
     }
