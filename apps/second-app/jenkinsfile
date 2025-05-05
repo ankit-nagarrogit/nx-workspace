@@ -31,9 +31,9 @@ pipeline {
     stage('Deploy second-app') {
       steps {
         bat '''
-          mkdir -p /var/www/second-app
-          cp -r dist/apps/second-app/* /var/www/second-app/
-          npx serve -s /var/www/second-app -l 3002 &
+          mkdir C:\\var\\www\\second-app
+          xcopy /E /I /H apps\\second-app\\dist\\* C:\\var\\www\\second-app\\
+          npx serve -s "C:/var/www/second-app" -l 3001
         '''
       }
     }
