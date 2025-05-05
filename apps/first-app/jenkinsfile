@@ -33,7 +33,7 @@ pipeline {
         bat '''
           mkdir C:\\var\\www\\first-app
           xcopy /E /I /H /Y apps\\first-app\\dist\\* C:\\var\\www\\first-app\\
-          start /B npx serve -s "C:/var/www/first-app" -l 3001
+          npx serve -s "C:/var/www/first-app" -l 3001
         '''
       }
     }
