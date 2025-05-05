@@ -32,7 +32,7 @@ pipeline {
       steps {
         bat '''
           mkdir C:\\var\\www\\second-app
-          xcopy /E /I /H apps\\second-app\\dist\\* C:\\var\\www\\second-app\\
+          xcopy /E /I /H /Y apps\\second-app\\dist\\* C:\\var\\www\\second-app\\
           start /B npx serve -s "C:/var/www/first-app" -l 3002
         '''
       }
