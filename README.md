@@ -33,13 +33,13 @@ Folder structure for the workspace app is as followed:
 ## What is NX monorepo and why to use it ?
 An monorepo is a workspace that manages multiple applications and libraries in a single repository. 
   ### Benefits of using NX monorepo:
-    - Manage all your apps, libraries, and utilities in **one place**.
-    - Smart Dependency Graph to analyze and see which app depends on which libraries.
-    - Run commands **only on affected projects** (`nx affected`).
-    - Use Cache: **Speeds up CI/CD pipelines** dramatically by skipping unchanged code.
-    - Enforces **project boundaries** using tags and lint rules.
-    - Works with many technologies: React, Angular, Node.js, NestJS, Next.js, etc.
-    - Generate components, libraries, or apps with consistent patterns.
+  - Manage all your apps, libraries, and utilities in **one place**.
+  - Smart Dependency Graph to analyze and see which app depends on which libraries.
+  - Run commands **only on affected projects** (`nx affected`).
+  - Use Cache: **Speeds up CI/CD pipelines** dramatically by skipping unchanged code.
+  - Enforces **project boundaries** using tags and lint rules.
+  - Works with many technologies: React, Angular, Node.js, NestJS, Next.js, etc.
+  - Generate components, libraries, or apps with consistent patterns.
 
 ## Run tasks
 
@@ -70,15 +70,6 @@ npx nx show project first-app
 ## What are cons of using it ?
   - May not be suitable for small projects.
   - Caching works best with **Nx Cloud (a paid service)** for distributed caching and remote task execution. Without it, large monorepos can suffer from slow CI builds.
-
----
-
-### 5. Not Ideal for Independent Teams
-
-- **Issue**: Teams that want full autonomy over deployments, tooling, and versioning may find the shared nature of a monorepo limiting.
-- **Impact**: Coordination overhead and possible dependency clashes.
-- Use of Tags needs some attention.
-- Migrating multiple existing repositories into a monorepo can be painful.
 
 --- 
 
